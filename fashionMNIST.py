@@ -185,6 +185,7 @@ def test(model, loader, f_loss, device):
             correct += (predicted_targets == targets).sum().item()
         return tot_loss/N, correct/N
 
+epochs = 10
 for t in range(epochs):
     print("Epoch {}".format(t))
     train(model, train_loader, f_loss, optimizer, device)
