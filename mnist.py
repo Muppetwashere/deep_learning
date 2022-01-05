@@ -57,7 +57,7 @@ if __name__ == '__main__':
     for t in range(epochs):
         print("Epoch {}".format(t))
         utils.train(model, train_loader, f_loss, optimizer, device)
-        model_checkpoint.update(val_loss)
         val_loss, val_acc = utils.test(model, valid_loader, f_loss, device)
+        model_checkpoint.update(val_loss)
         print(" Validation : Loss : {:.4f}, Acc : {:.4f}".format(val_loss, val_acc))
 
