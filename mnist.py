@@ -7,6 +7,7 @@ import data
 import models
 import utils
 
+import sys
 import os.path
 import os
 import torch.nn as nn
@@ -80,4 +81,33 @@ if __name__ == '__main__':
         tensorboard_writer.add_scalar('metrics/train_acc',  train_acc, t)
         tensorboard_writer.add_scalar('metrics/val_loss', val_loss, t)
         tensorboard_writer.add_scalar('metrics/val_acc',  val_acc, t)
+
+
+    # Documenting the script
+    summary_file = open(logdir + "/summary.txt", 'w')
+    summary_text = """
+
+Executed command
+================
+{}
+
+Dataset
+=======
+FashionMNIST
+
+Model summary
+=============
+{}
+
+{} trainable parameters
+
+Optimizer
+========
+{}
+
+""".format(" ".join(sys.argv), model, sum(p.numel() for p in model.parameters() if p.requires_grad), optimizer)
+    summary_file.write(summary_text)
+    summary_file.close()
+
+    tensorboard_writer.add_text("Experiment summary", summary_text) 
 
