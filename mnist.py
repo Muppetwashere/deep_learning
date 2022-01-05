@@ -49,7 +49,7 @@ if __name__ == '__main__':
         os.mkdir(top_logdir)
 
     # Define the callback object
-    model_checkpoint = utils.ModelCheckpoint(logdir + "/best_model.pt", model)
+    model_checkpoint = utils.ModelCheckpoint(logdir, model)
 
     # Main loop
     epochs = 10
