@@ -48,6 +48,9 @@ if __name__ == '__main__':
     if not os.path.exists(top_logdir):
         os.mkdir(top_logdir)
 
+    if not os.path.exists("/best_model.pt"):
+        os.mkdir("/best_model.pt")
+
     # Define the callback object
     model_checkpoint = utils.ModelCheckpoint(logdir + "/best_model.pt", model)
 
