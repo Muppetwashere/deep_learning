@@ -6,11 +6,12 @@ import models
 import utils
 
 import os.path
+import os
 import torch.nn as nn
 
 if __name__ == '__main__':
-    # Datasets
 
+    # Datasets
     dataset_dir = os.path.join(os.path.expanduser("~"), 'Datasets', 'FashionMNIST')
     valid_ratio = 0.2  # Going to use 80%/20% split for train/valid
 
@@ -40,12 +41,23 @@ if __name__ == '__main__':
     f_loss = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters())
 
+    # Saving the model everytime a script is executed 
+    top_logdir = "./logs"
+    logdir = utils.generate_unique_logpath(top_logdir, "linear")
+
+    if not os.path.exists(top_logdir):
+        os.mkdir(top_logdir)
+
+    # Define the callback object
+    model_checkpoint = utils.ModelCheckpoint(logdir + "/best_model.pt", model)
+
     # Main loop
     epochs = 10
 
     for t in range(epochs):
         print("Epoch {}".format(t))
         utils.train(model, train_loader, f_loss, optimizer, device)
-
+        model_checkpoint.update(val_loss)
         val_loss, val_acc = utils.test(model, valid_loader, f_loss, device)
         print(" Validation : Loss : {:.4f}, Acc : {:.4f}".format(val_loss, val_acc))
+
