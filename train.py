@@ -25,13 +25,13 @@ if __name__ == '__main__':
 
     train_loader, valid_loader, test_loader = data.load_fashion_mnist(valid_ratio, batch_size, num_threads)
 
-    # Init model, loss, optimizer
+    # loss, optim
     model.to(device)
     loss = nn.CrossEntropyLoss()  # This computes softmax internally
     optimizer = torch.optim.Adam(model.parameters())
 
 
-    ######## Main Loop
+    # Main Loop
     epochs = 10
 
     for t in range(epochs):
