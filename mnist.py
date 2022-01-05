@@ -12,7 +12,7 @@ import os
 import torch.nn as nn
 
 if __name__ == '__main__':
-
+    print("tensorboard --logdir ./logs for monitoring")
     # Datasets
     dataset_dir = os.path.join(os.path.expanduser("~"), 'Datasets', 'FashionMNIST')
     valid_ratio = 0.2  # Going to use 80%/20% split for train/valid
@@ -57,8 +57,7 @@ if __name__ == '__main__':
         os.mkdir(logdir)
 
     # Monitoring 
-
-    tensorboard_writer   = SummaryWriter(log_dir = logdir)
+    tensorboard_writer   = SummaryWriter(log_dir = logdir) # start tensorboard --logdir ./logs in the terminal
     # Define the callback object
     model_checkpoint = utils.ModelCheckpoint(logdir + "/best_model.pt", model)
 
@@ -76,7 +75,7 @@ if __name__ == '__main__':
         
         test_loss, test_acc = utils.test(model, test_loader, f_loss, device)
         print(" Test       : Loss : {:.4f}, Acc : {:.4f}".format(test_loss, test_acc))
-        
+
         tensorboard_writer.add_scalar('metrics/train_loss', train_loss, t)
         tensorboard_writer.add_scalar('metrics/train_acc',  train_acc, t)
         tensorboard_writer.add_scalar('metrics/val_loss', val_loss, t)
