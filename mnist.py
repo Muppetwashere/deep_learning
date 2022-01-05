@@ -48,8 +48,14 @@ if __name__ == '__main__':
     if not os.path.exists(top_logdir):
         os.mkdir(top_logdir)
 
+    logdir = utils.generate_unique_logpath(top_logdir, "linear")
+    print("Logging to {}".format(logdir))
+    # -> Prints out     Logging to   ./logs/linear_1
+    if not os.path.exists(logdir):
+        os.mkdir(logdir)
+
     # Define the callback object
-    model_checkpoint = utils.ModelCheckpoint(logdir, model)
+    model_checkpoint = utils.ModelCheckpoint(logdir + "/best_model.pt", model)
 
     # Main loop
     epochs = 10
