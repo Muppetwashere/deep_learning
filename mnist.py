@@ -43,12 +43,14 @@ if __name__ == '__main__':
 
     # Saving the model everytime a script is executed 
     top_logdir = "./logs"
+
     if not os.path.exists(top_logdir):
         os.mkdir(top_logdir)
+
     logdir = utils.generate_unique_logpath(top_logdir, "linear")
 
     print("Logging to {}".format(logdir))
-    # -> Prints out     Logging to   ./logs/linear_1
+    
     if not os.path.exists(logdir):
         os.mkdir(logdir)
 
