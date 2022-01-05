@@ -1,6 +1,8 @@
 import torch
 import torchvision                                                       
 import torchvision.transforms as transforms
+from torch.utils.tensorboard import SummaryWriter
+
 import data
 import models
 import utils
@@ -41,7 +43,7 @@ if __name__ == '__main__':
     f_loss = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters())
 
-    # Saving the model everytime a script is executed 
+    # Where to save
     top_logdir = "./logs"
 
     if not os.path.exists(top_logdir):
@@ -50,10 +52,13 @@ if __name__ == '__main__':
     logdir = utils.generate_unique_logpath(top_logdir, "linear")
 
     print("Logging to {}".format(logdir))
-    
+
     if not os.path.exists(logdir):
         os.mkdir(logdir)
 
+    # Monitoring 
+
+    tensorboard_writer   = SummaryWriter(log_dir = logdir)
     # Define the callback object
     model_checkpoint = utils.ModelCheckpoint(logdir + "/best_model.pt", model)
 
@@ -66,4 +71,14 @@ if __name__ == '__main__':
         val_loss, val_acc = utils.test(model, valid_loader, f_loss, device)
         model_checkpoint.update(val_loss)
         print(" Validation : Loss : {:.4f}, Acc : {:.4f}".format(val_loss, val_acc))
+
+        train_loss, train_acc = utils.test(model, train_loader, f_loss, device)
+        
+        test_loss, test_acc = utils.test(model, test_loader, f_loss, device)
+        print(" Test       : Loss : {:.4f}, Acc : {:.4f}".format(test_loss, test_acc))
+        
+        tensorboard_writer.add_scalar('metrics/train_loss', train_loss, t)
+        tensorboard_writer.add_scalar('metrics/train_acc',  train_acc, t)
+        tensorboard_writer.add_scalar('metrics/val_loss', val_loss, t)
+        tensorboard_writer.add_scalar('metrics/val_acc',  val_acc, t)
 
