@@ -59,6 +59,7 @@ if __name__ == '__main__':
 
     # Monitoring 
     tensorboard_writer   = SummaryWriter(log_dir = logdir) # start tensorboard --logdir ./logs in the terminal
+    
     # Define the callback object
     model_checkpoint = utils.ModelCheckpoint(logdir + "/best_model.pt", model)
 
