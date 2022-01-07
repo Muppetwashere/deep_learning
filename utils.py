@@ -112,3 +112,4 @@ def test(model, loader, f_loss, device):
             predicted_targets = outputs.argmax(dim=1)
             correct += (predicted_targets == targets).sum().item()
         return tot_loss/N, correct/N
+

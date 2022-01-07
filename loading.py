@@ -5,6 +5,8 @@ import models
 import utils
 import data
 
+
+## example of loading a model 
 model_path = "./logs/linear_0/best_model.pt"
 model = models.LinearNet(1*28*28, 10)
 
