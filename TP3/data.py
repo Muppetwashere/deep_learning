@@ -505,4 +505,6 @@ def plot_spectro(spectrogram: torch.Tensor,
 
 
 if __name__ == '__main__':
-    pass
+    #question 1
+    print("question1")
+    train_dataset = load_dataset("train","/mounts/Datasets2/CommonVoice")
