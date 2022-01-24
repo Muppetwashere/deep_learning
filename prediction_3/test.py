@@ -68,7 +68,7 @@ for subfolder in subfolders:
 
 print(classes)
 
-plt.imshow(img[0], vmin=0, vmax=1.0)
+plt.imshow(img[0].permute(1, 2, 0), vmin=0, vmax=1.0)
 #nsamples=10
 #fig=plt.figure(figsize=(20,5),facecolor='w')
 #for i in range(nsamples):
