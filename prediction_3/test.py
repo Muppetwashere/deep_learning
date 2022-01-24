@@ -66,17 +66,14 @@ subfolders.sort()
 for subfolder in subfolders:
     classes.append(subfolder.split('/')[-1])
 
-print(classes)
+nsamples=10
+fig=plt.figure(figsize=(20,5),facecolor='w')
+for i in range(nsamples):
+    ax = plt.subplot(1,nsamples, i+1)
+    plt.imshow(img[i, 0, :, :])
+    ax.set_title("{}".format(classes[label[i]]), fontsize=8)
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
 
-plt.imshow(img[0].permute(1, 2, 0).numpy(), vmin=0, vmax=1.0)
-#nsamples=10
-#fig=plt.figure(figsize=(20,5),facecolor='w')
-#for i in range(nsamples):
-#    ax = plt.subplot(1,nsamples, i+1)
-#    plt.imshow(img[i, 0, :, :], vmin=0, vmax=1.0)
-#    ax.set_title("{}".format(classes[label[i]]), fontsize=15)
-#    ax.get_xaxis().set_visible(False)
-#    ax.get_yaxis().set_visible(False)
-
-#plt.savefig('fashionMNIST_samples.png', bbox_inches='tight')
-#plt.show()
+plt.savefig('fashionMNIST_samples.png', bbox_inches='tight')
+plt.show()
