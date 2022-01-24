@@ -208,7 +208,10 @@ class WaveformProcessor(object):
 
             modules = [
                 FrequencyMasking(nmel_mask),
-                TimeMasking(time_mask_nsamples)
+                TimeMasking(time_mask_nsamples),
+                MelSpectrogram(),
+                AmplitudeToDB(),
+
             ]
             self.transform_augment = nn.Sequential(*modules)
         ##########################
