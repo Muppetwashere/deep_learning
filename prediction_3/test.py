@@ -13,8 +13,8 @@ from logs import *
 import os
 
 # Path to train and test data
-DATA_TRAIN_PATH = '/Users/alain/Documents/Cours/3A CS/deepwhale/train'
-DATA_TEST_PATH = '/Users/alain/Documents/Cours/3A CS/deepwhale/test/imgs'
+DATA_TRAIN_PATH = '/mounts/Datasets1/ChallengeDeep/train'
+DATA_TEST_PATH = '/mounts/Datasets1/ChallengeDeep/test/imgs'
 
 print(os.path.exists(DATA_TRAIN_PATH))
 
@@ -33,7 +33,7 @@ eval_ratio = 0.15
 test_ratio = 0.05
 
 # device
-device = torch.device('cpu')
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Load dataset
 plankton_dataset = PlanktonDataset(DATA_TRAIN_PATH, final_size = img_size)
@@ -53,8 +53,10 @@ print("The train set contains {} images, in {} batches".format(len(train_dataloa
 print("The evaluation set contains {} images, in {} batches".format(len(eval_dataloader.dataset), len(eval_dataloader)))
 print("The test set contains {} images, in {} batches".format(len(test_dataloader.dataset), len(test_dataloader)))
 
-for (img,label) in test_dataloader:
-    print(label)
+example = iter(train_dataloader)
+img,label = example.next()
+print(label)
+
 
 #plt.imshow(imgs[0],vmin=0, vmax=1.0, cmap=cm.gray)
 #nsamples=10
