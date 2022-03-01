@@ -1,0 +1,22 @@
+h5py
+streamlit
+six
+# numpy<1.17,>=1.14.5
+numpy
+matplotlib
+scikit-learn
+pandas
+tqdm
+openpyxl
+xlrd
+tensorflow == 2.0
+pytest
+pyarrow
+ipykernel   # Only needed for progress bars in Pycharm
+jupyter
+tables      # Needed to save pandas Dataframes into .h5 files
+keras_tqdm
+# version using tensorflow rather than keras
+# git+https://github.com/saattrupdan/keras-tqdm.git #--upgrade --no-deps
+
+torch
